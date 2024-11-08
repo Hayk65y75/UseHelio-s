@@ -9,7 +9,7 @@ module.exports = {
 
     await interaction.reply({
       content: `Voici la liste des commandes disponibles :\n\n${commandes}`,
-      ephemeral: true,  // Affiche le message uniquement pour l'utilisateur qui a exécuté la commande
+      ephemeral: true,
     });
   },
 };
