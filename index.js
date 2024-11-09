@@ -3,7 +3,7 @@ const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { loadHandlers } = require('./handlers');
 const { deploy } = require('./functions/deploy');
 
-// Validate required environment variables
+// sa regarde si ta bien le token ou client_id dans le .env
 if (!process.env.DISCORD_TOKEN) {
   console.error('Error: DISCORD_TOKEN is required in .env file');
   process.exit(1);
@@ -22,10 +22,10 @@ const client = new Client({
   ]
 });
 
-// Initialize collections
+// initialiser les collections
 client.commands = new Collection();
 
-// Error handling
+// gestion des erreurs
 client.on('error', error => {
   console.error('Discord client error:', error);
 });
