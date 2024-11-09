@@ -1,4 +1,4 @@
-  # 🤖 Helio's
+  # 🤖 Application: Helio's [V1.0.0]
 
 ## 📋 Prérequis
 
