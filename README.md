@@ -1,3 +1,4 @@
+![Dernière version](https://img.shields.io/github/v/release/Hayk65y75/UseHelio-s?label=Dernière%20version)
   # 🤖 Application: Helio's [V1.0.0]
 
 ## 📋 Prérequis
