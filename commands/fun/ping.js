@@ -1,18 +1,24 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-    data: new SlashCommandBuilder()
-        .setName('ping')
-        .setDescription('Replies with Pong! and shows the bot latency.'),
+  dev: true, // La commande sera uniquement disponible sur le serveur de développement
+  data: new SlashCommandBuilder()
+    .setName('ping')
+    .setDescription('Affiche la latence du bot'),
 
-    async execute(interaction) {
-        // Envoie une réponse initiale pour calculer la latence
-        const sent = await interaction.reply({ content: 'Pong!', fetchReply: true });
+  async execute(interaction) {
+    const sent = await interaction.reply({ 
+      content: 'Calcul de la latence...', 
+      fetchReply: true 
+    });
         
-        // Calcule la latence et édite la réponse pour afficher les informations
-        const latency = sent.createdTimestamp - interaction.createdTimestamp;
-        const apiLatency = Math.round(interaction.client.ws.ping);
+    const latency = sent.createdTimestamp - interaction.createdTimestamp;
+    const apiLatency = Math.round(interaction.client.ws.ping);
         
-        await interaction.editReply(`Pong! Latence : ${latency}ms. API Latence : ${apiLatency}ms.`);
-    },
+    await interaction.editReply(
+      `🏓 Pong!\n` +
+      `📊 Latence: \`${latency}ms\`\n` +
+      `🌐 Latence API: \`${apiLatency}ms\``
+    );
+  },
 };
