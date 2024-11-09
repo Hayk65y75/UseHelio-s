@@ -36,7 +36,7 @@ npm rebuild
 
 5. Lancez le bot :
 ```bash
-npm start
+node index.js
 ```
 
 ## ⚙️ Configuration
