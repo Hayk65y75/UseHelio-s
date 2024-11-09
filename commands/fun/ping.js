@@ -28,7 +28,7 @@ module.exports = {
 
     // Création de l'Embed
     const embed = new EmbedBuilder()
-      .setTitle('🏓 Le Ping d\'Helio !')
+      .setTitle('🏓 Le Ping d\'Helio')
       .setColor(color)
       .setThumbnail('https://media.giphy.com/media/MaXOUjkV73aO4/giphy.gif?cid=790b76113iajoc92yyaafpy1e34ctnk472d4xv364bpgud80&ep=v1_gifs_search&rid=giphy.gif&ct=g')
       .addFields(
