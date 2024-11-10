@@ -9,7 +9,7 @@ module.exports = {
     const { guild } = interaction;
 
     try {
-      // Récupérer les statistiques des membres
+      // Récupérer les statistiques des membres sur le serveur
       const totalMembers = guild.memberCount;
       const onlineMembers = guild.members.cache.filter(
         member => member.presence && member.presence.status !== 'offline'
