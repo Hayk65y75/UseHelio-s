@@ -11,21 +11,20 @@ module.exports = {
     try {
       // Récupérer les statistiques des membres sur le serveur
       const totalMembers = guild.memberCount;
-      const onlineMembers = await guild.members.fetch()
-        .then(members => members.filter(
-          member => member.presence && member.presence.status !== 'offline'
-        ).size);
+      const onlineMembers = guild.members.cache.filter(
+        member => member.presence && member.presence.status !== 'offline'
+      ).size;
       const offlineMembers = totalMembers - onlineMembers;
 
       // Créer l'embed avec un alignement propre
       const embed = new EmbedBuilder()
-        .setColor("Yellow")
+        .setColor("Yellow") // Couleur de fond
         .setTitle(`${guild.name} ➔ Statistiques`)
         .setThumbnail('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG5jcjJucW01ejY2bTkwbGppemFnc2N0MnU3amNlaXdsN2M5cHlnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ho6dPXSABg2wGcuHEj/giphy.webp')
         .addFields(
-          { name: '🌍 Membres', value: `${totalMembers}`, inline: true },
-          { name: '💚 En Ligne', value: `${onlineMembers}`, inline: true },
-          { name: '🔴 Hors Ligne', value: `${offlineMembers}`, inline: true }
+          { name: '🌍 Membres', value: `Total: ${totalMembers}`, inline: true },
+          { name: '💚 En Ligne', value: `En ligne: ${onlineMembers}`, inline: true },
+          { name: '🔴 Hors Ligne', value: `Hors ligne: ${offlineMembers}`, inline: true }
         )
         .setTimestamp();
 
