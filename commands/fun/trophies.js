@@ -11,9 +11,10 @@ module.exports = {
     try {
       // Récupérer les statistiques des membres sur le serveur
       const totalMembers = guild.memberCount;
-      const onlineMembers = guild.members.cache.filter(
-        member => member.presence && member.presence.status !== 'offline'
-      ).size;
+      const onlineMembers = await guild.members.fetch()
+        .then(members => members.filter(
+          member => member.presence && member.presence.status !== 'offline'
+        ).size);
       const offlineMembers = totalMembers - onlineMembers;
 
       // Créer l'embed avec un alignement propre
@@ -22,9 +23,9 @@ module.exports = {
         .setTitle(`${guild.name} ➔ Statistiques`)
         .setThumbnail('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG5jcjJucW01ejY2bTkwbGppemFnc2N0MnU3amNlaXdsN2M5cHlnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ho6dPXSABg2wGcuHEj/giphy.webp')
         .addFields(
-          { name: '🌍 Membres', value: `\u2003: ${totalMembers}`, inline: true },
-          { name: '💚 En Ligne', value: `\u2003: ${onlineMembers}`, inline: true },
-          { name: '🔴 Hors Ligne', value: `\u2003: ${offlineMembers}`, inline: true }
+          { name: '🌍 Membres', value: `\u2003:${totalMembers}`, inline: true },
+          { name: '💚 En Ligne', value: `\u2003:${onlineMembers}`, inline: true },
+          { name: '🔴 Hors Ligne', value: `\u2003:${offlineMembers}`, inline: true }
         )
         .setTimestamp();
 
