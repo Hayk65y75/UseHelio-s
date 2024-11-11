@@ -9,23 +9,24 @@ module.exports = {
     const { guild } = interaction;
 
     try {
-      // Récupérer les statistiques des membres sur le serveur
+      // Récupérer les statistiques des membres
       const totalMembers = guild.memberCount;
       const onlineMembers = guild.members.cache.filter(
         member => member.presence?.status && member.presence.status !== 'offline'
       ).size;
       const offlineMembers = totalMembers - onlineMembers;
 
-      // Créer l'embed avec un alignement propre
+      // Créer l'embed avec des couleurs et des emojis
       const embed = new EmbedBuilder()
-        .setColor("Yellow") // Couleur de fond similaire à l'image
-        .setTitle(`${guild.name} ➔ Statistiques`)
-        .setThumbnail('https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG5jcjJucW01ejY2bTkwbGppemFnc2N0MnU3amNlaXdsN2M5cHlnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ho6dPXSABg2wGcuHEj/giphy.webp')
+        .setColor(0x2F3136) // Couleur de fond neutre
+        .setTitle(`📊 ${guild.name} ➔ Statistiques`)
+        .setThumbnail(guild.iconURL({ dynamic: true })) // Logo du serveur
         .addFields(
-          { name: '🌍 Membres', value: `\u2003: ${totalMembers}`, inline: true },
-          { name: '💚 En Ligne', value: `\u2003: ${onlineMembers}`, inline: true },
-          { name: '🔴 Hors Ligne', value: `\u2003: ${offlineMembers}`, inline: true }
+          { name: '🌍 Membres', value: `**${totalMembers}**`, inline: true },
+          { name: '💚 En Ligne', value: `**${onlineMembers}**`, inline: true },
+          { name: '🔴 Hors Ligne', value: `**${offlineMembers}**`, inline: true }
         )
+        .setFooter({ text: "Helio's Use", iconURL: 'https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG5jcjJucW01ejY2bTkwbGppemFnc2N0MnU3amNlaXdsN2M5cHlnMiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ho6dPXSABg2wGcuHEj/giphy.webp' })
         .setTimestamp();
 
       // Répondre avec l'embed
