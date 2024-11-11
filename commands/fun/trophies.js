@@ -11,7 +11,9 @@ module.exports = {
     try {
       // Récupérer les statistiques des membres sur le serveur
       const totalMembers = guild.memberCount;
-      const onlineMembers = guild.members.cache.filter(member => member.presence?.status === 'online').size;
+      const onlineMembers = guild.members.cache.filter(
+        member => member.presence?.status && member.presence.status !== 'offline'
+      ).size;
       const offlineMembers = totalMembers - onlineMembers;
 
       // Créer l'embed avec un alignement propre
