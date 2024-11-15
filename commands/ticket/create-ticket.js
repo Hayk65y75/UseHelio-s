@@ -1,21 +1,30 @@
-const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, StringSelectMenuBuilder, ActionRowBuilder } = require('discord.js');
+const { TicketManager } = require('../../functions/ticket/ticketManager');
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('support')
-    .setDescription('Ouvre le menu de support')
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+    .setName('create-ticket')
+    .setDescription('Ouvre le menu de création de ticket'),
   
   async execute(interaction) {
+    const config = await TicketManager.getTicketConfig(interaction.guildId);
+    
+    if (!config) {
+      return interaction.reply({
+        content: '❌ Le système de tickets n\'est pas configuré. Un administrateur doit d\'abord utiliser `/ticket-setup`.',
+        ephemeral: true
+      });
+    }
+
     const embed = new EmbedBuilder()
-      .setTitle('🛠️ Support')
+      .setTitle('🛠️ Création de Ticket')
       .setDescription('Sélectionnez le type de ticket que vous souhaitez ouvrir ci-dessous.')
-      .setThumbnail('https://cdn.discordapp.com/attachments/970694097415340133/1295494458804142211/Picsart_24-10-14_23-10-28-265.png?ex=6735befc&is=67346d7c&hm=6acc9c0e00fec0179376f30d3b6e88ec93f9b8058c93dd135289b813f62ad28f&')
+      .setThumbnail('https://cdn.discordapp.com/attachments/970694097415340133/1295494458804142211/Picsart_24-10-14_23-10-28-265.png')
       .setColor('Purple');
     
     const supportMenu = new StringSelectMenuBuilder()
       .setCustomId('support-menu')
-      .setPlaceholder('📂 Choisissez une catégorie de support')
+      .setPlaceholder('📂 Choisissez une catégorie de ticket')
       .addOptions([
         {
           label: 'Recrutement',
