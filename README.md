@@ -40,7 +40,7 @@ npm rebuild
 
 5. Lancez le bot :
 ```bash
-node index.js
+node helio.js ou npm start
 ```
 
 ## ⚙️ Configuration
