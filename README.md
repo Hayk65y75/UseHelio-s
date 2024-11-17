@@ -31,8 +31,9 @@ DEV_GUILD_ID=id_de_votre_serveur
 
 4. Installez les dépendances :
 ```bash
-# installer des modules
+# installer les modules
 npm i
+
 # Reconstruction des modules
 npm rebuild
 ```
