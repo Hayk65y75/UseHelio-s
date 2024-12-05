@@ -2,9 +2,8 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { loadHandlers } = require('./handlers');
 const { deploy } = require('./functions/deploy');
-const database = require('./database'); // Import de l'instance Sequelize
 
-// Vérification des variables d'environnement
+// sa regarde si ta bien le token ou client_id dans le .env
 if (!process.env.DISCORD_TOKEN) {
   console.error('Error: DISCORD_TOKEN is required in .env file');
   process.exit(1);
@@ -15,7 +14,6 @@ if (!process.env.CLIENT_ID) {
   process.exit(1);
 }
 
-// Création du client Discord
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -24,10 +22,10 @@ const client = new Client({
   ]
 });
 
-// Initialisation des collections
+// initialiser les collections
 client.commands = new Collection();
 
-// Gestion des erreurs
+// gestion des erreurs
 client.on('error', error => {
   console.error('Discord client error:', error);
 });
@@ -40,18 +38,16 @@ process.on('unhandledRejection', error => {
   console.error('Unhandled promise rejection:', error);
 });
 
-// Démarrage du bot
 async function startBot() {
   try {
-    // Charger les handlers
+    // charges tous les handlers
     loadHandlers(client);
 
-    // Déployer les commandes
+    // déploie les commandes après que le bot soit lancé
     console.log('🔄 Déploiement automatique des commandes...');
     await deploy();
     console.log('✅ Commandes déployées avec succès !');
 
-    // Connexion au bot Discord
     await client.login(process.env.DISCORD_TOKEN);
     console.log('🤖 Bot connecté avec succès !');
   } catch (error) {
