@@ -8,7 +8,7 @@ module.exports = {
 
   async execute(interaction) {
     const sent = await interaction.reply({ 
-      content: 'Calcul de la latence...', 
+      content: 'Calcul de la latence..', 
       fetchReply: true 
     });
         
