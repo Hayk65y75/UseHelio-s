@@ -2,9 +2,9 @@ require('dotenv').config();
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
 const { loadHandlers } = require('./handlers');
 const { deploy } = require('./functions/deploy');
-const database = require('./database'); // Import de la connexion à la base
+const database = require('./database'); // Import de l'instance Sequelize
 
-// Vérifications des variables d'environnement
+// Vérification des variables d'environnement
 if (!process.env.DISCORD_TOKEN) {
   console.error('Error: DISCORD_TOKEN is required in .env file');
   process.exit(1);
@@ -40,18 +40,13 @@ process.on('unhandledRejection', error => {
   console.error('Unhandled promise rejection:', error);
 });
 
-// Initialisation et démarrage du bot
+// Démarrage du bot
 async function startBot() {
   try {
-    // Connexion à la base de données
-    console.log('🔄 Connexion à la base de données...');
-    await database.authenticate(); // Vérifie la connexion
-    console.log('✅ Base de données connectée avec succès !');
-
-    // Chargement des handlers
+    // Charger les handlers
     loadHandlers(client);
 
-    // Déploiement des commandes
+    // Déployer les commandes
     console.log('🔄 Déploiement automatique des commandes...');
     await deploy();
     console.log('✅ Commandes déployées avec succès !');
