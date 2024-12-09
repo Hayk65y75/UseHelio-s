@@ -6,7 +6,7 @@ const sequelize = new Sequelize(
   process.env.DB_USER, // Utilisateur
   process.env.DB_PASS, // Mot de passe
   {
-    host: process.env.DB_HOST.replace('http://', ''), // Hôte (sans "http://")
+    host: process.env.DB_HOST.replace('http://', ''), // Hôte
     dialect: 'mysql', // Type de base (MySQL dans ce cas)
     logging: false,   // Désactiver les logs SQL
   }
